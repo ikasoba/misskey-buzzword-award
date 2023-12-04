@@ -1,0 +1,8 @@
+{
+  "lock": false,
+  "imports": {
+    "misskey-js/": "https://esm.sh/misskey-js@0.0.16/",
+    "deno_mecab/": "https://deno.land/x/deno_mecab@v1.2.3/",
+    "mfm-js/": "https://esm.sh/mfm-js@0.23.3/"
+  }
+}
