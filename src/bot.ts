@@ -85,7 +85,13 @@ export class Bot {
       if (note.text === "!test-buzzword-award-announce") {
         await this.sendAnnounce();
       } else if (note.text && note.userId !== me.id && !note.user.instance) {
-        await this.buzzWords.measure(note.text);
+        try {
+          await this.buzzWords.measure(note.text).catch((e) => {
+            throw e;
+          });
+        } catch (e) {
+          console.error(e);
+        }
       }
     });
   }
