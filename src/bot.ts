@@ -83,6 +83,8 @@ export class Bot {
       if (note.text === "!test-buzzword-award-announce") {
         await this.sendAnnounce();
       } else if (note.text && note.userId !== me.id && !note.user.instance) {
+        const t = performance.now();
+        console.log("start measure");
         try {
           await this.buzzWords.measure(note.text).catch((e) => {
             throw e;
@@ -90,6 +92,7 @@ export class Bot {
         } catch (e) {
           console.error(e);
         }
+        console.log("end measure - ", (performance.now() - t) / 1000, "sec");
       }
     });
   }
