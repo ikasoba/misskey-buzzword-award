@@ -44,12 +44,10 @@ export class Bot {
 
     console.log("get buzzword");
     const counts = await this.buzzWords.get(dt);
-    const words =
-      counts &&
-      Object.entries(counts)
-        .sort(() => 0.5 - Math.random())
-        .sort(([_, x], [__, y]) => y - x)
-        .slice(0, 10);
+    const words = [...counts.entries()]
+      .sort(() => 0.5 - Math.random())
+      .sort(([_, x], [__, y]) => y - x)
+      .slice(0, 10);
 
     console.log("send announce", counts, words);
     await this.client.request("notes/create", {
@@ -61,7 +59,7 @@ export class Bot {
           )
         ),
         mfm.x2(" "),
-        words == null
+        words.length == 0
           ? "今週の流行語はひとつもありませんでした。"
           : words.map((w, i) => `第${i + 1}位「${w[0]}」`).join("\n\n"),
         "\n\nまた来週。",
