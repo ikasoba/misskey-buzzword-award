@@ -6,7 +6,9 @@ import { Stream, api } from "misskey-js/";
 
 const buzzWords = new BuzzWords(
   new MeCab([Deno.env.get("MECAB")!]),
-  await Deno.openKv("./db/buzzWords")
+  await Deno.openKv("./db/counts"),
+  await Deno.openKv("./db/scores"),
+  await Deno.openKv("./db/meta")
 );
 
 const tasks = new TaskRunner();
